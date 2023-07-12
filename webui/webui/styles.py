@@ -57,10 +57,7 @@ base_style = {
             "bg": accent_dark,
         },
     },
-    pc.Menu: {
-        "bg": bg_dark_color,
-        "border": f"red",
-    },
+    pc.Menu: {"bg": bg_dark_color, "border": "red"},
     pc.MenuList: {
         "bg": bg_dark_color,
         "border": f"1.5px solid {bg_medium_color}",
