@@ -52,10 +52,7 @@ def message(qa: QA) -> rx.Component:
 def chat() -> rx.Component:
     """List all the messages in a single conversation."""
     return rx.auto_scroll(
-        rx.foreach(
-            State.chats[State.current_chat],
-            message,
-        ),
+        rx.foreach(State.selected_chat, message),
         flex="1",
         padding="8px",
     )
@@ -76,7 +73,6 @@ def action_bar() -> rx.Component:
                         ),
                         placeholder="Type something...",
                         id="question",
-                        disabled=State.processing,
                         flex="1",
                     ),
                     rx.button(
@@ -89,7 +85,8 @@ def action_bar() -> rx.Component:
                     margin="0 auto",
                     align_items="center",
                 ),
-                on_submit=[State.process_question, rx.set_value("question", "")],
+                reset_on_submit=True,
+                on_submit=State.process_question,
             ),
             rx.text(
                 "ReflexGPT may return factually incorrect or misleading responses. Use discretion.",
